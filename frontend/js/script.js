@@ -1,0 +1,1 @@
+console.log("This is an example script that does nothing except for log this message to the console")

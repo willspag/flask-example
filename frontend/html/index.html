@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="/media/example_favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Flask Page</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="/css/styles.css" media="screen">
+    <!-- Hidden input csrf token for AI Research Assistant -->
+</head>
+<body class="bg-gray-50 flex flex-col justify-between h-screen">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/" class="gradient-text text-3xl font-bold">Flask App</a>
+            <nav>
+                <a href="/features" class="hover-underline-animation text-gray-600 hover:text-gray-900 mx-2">Features</a>
+                <a href="/pricing" class="hover-underline-animation text-gray-600 hover:text-gray-900 mx-2">Pricing</a>
+                <a href="/about" class="hover-underline-animation text-gray-600 hover:text-gray-900 mx-2">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto max-w-md mt-10 mb-auto p-8 bg-white rounded-lg shadow-xl">
+        <h2 class="text-4xl font-bold mb-2 text-center gradient-text">Example Form</h2>
+        <h3 class="text-md mb-8 text-gray-600 text-center">Type your input here and submit to have the pythopn backend send back a response.</h3>
+        <form id="example_form" method="post" enctype="multipart/form-data" action="" class="space-y-4">
+            {{ example_form.hidden_tag() }}
+            <!-- Your form inputs go here -->
+            {{error}}
+
+
+            <div class="flex flex-col mb-4">
+                {{ example_form.text_area_input.label(class_="block text-md mb-2") }}
+                {{ example_form.text_area_input(class_="mt-1 p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent") }}
+            </div>
+            {{ example_form.submit(class_="button-hover-effect w-full bg-gradient-to-r from-teal-400 to-blue-500 text-white font-semibold rounded-lg px-4 py-3 mt-6") }}
+        </form>
+    <!-- AI Response Section -->
+    <section class="mt-8 p-6 bg-white rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold gradient-text mb-4">Response</h3>
+        <div id="markdown-container" class="text-gray-700 text-lg space-y-4 overflow-auto"></div>
+            {{ response | safe }}
+        </div>
+    </section>
+
+
+
+</main>
+    <!-- Footer -->
+    <footer class="bg-white shadow-inner">
+        <div class="container mx-auto px-6 py-4">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="/" class="text-xl font-bold text-gray-700 hover:text-gray-600">Flask App</a>
+            </div>
+            <hr class="my-6 border-gray-200 w-full">
+            <p class="block text-sm text-gray-500 sm:text-center">© 2023 Example Company. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

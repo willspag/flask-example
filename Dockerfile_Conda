@@ -1,0 +1,32 @@
+FROM continuumio/miniconda3
+
+
+# Add a non-root user to run the app
+RUN useradd -m appuser
+
+WORKDIR /app
+COPY . /app
+
+
+
+# Create the environment:
+RUN conda env create -f example_env.yml -n example-env
+
+# Download vina_split
+# Make RUN commands use the new environment:
+SHELL ["conda", "run", "-n", "example-env", "/bin/bash", "-c"]
+
+# Re-istall gunicorn just in case (Can remove this for faster container creation if guinicorn is already installed in your Conda envuronment)
+RUN conda install -c conda-forge gunicorn --yes
+
+# Try to update OpenAI Hopefully
+
+# Expose Port
+EXPOSE 8080
+
+# Run the app using gunicorn as the non-root user
+CMD ["conda", "run", "-n", "lime-mf", "gunicorn", "--user", "appuser", "--bind", "0.0.0.0:8080", "app:app",]
+
+
+# docker build -t flask-example-app .
+# gcloud builds submit --tag gcr.io/$GCLOUD_PROJECT_ID/flask-example-app --timeout=24h
